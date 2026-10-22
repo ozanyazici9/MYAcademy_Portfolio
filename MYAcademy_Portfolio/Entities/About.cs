@@ -3,11 +3,11 @@
 public class About
 {
     public int AboutId { get; set; }
-    public string NameSurname { get; set; }
-    public string JobTitle { get; set; }
-    public string Location { get; set; }
-    public string Expert { get; set; }
-    public string Email { get; set; }
-    public string Description { get; set; }
-    public string OpenToWork { get; set; }
+    public string NameSurname { get; set; } = null!;
+    public string JobTitle { get; set; } = null!;
+    public string Location { get; set; } = null!;
+    public string Expert { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string Description { get; set; } = null!;
+    public string OpenToWork { get; set; } = null!;
 }
