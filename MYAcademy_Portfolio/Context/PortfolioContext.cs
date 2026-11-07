@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MYAcademy_Portfolio.Entities;
 
 namespace MYAcademy_Portfolio.Context;
@@ -20,5 +19,6 @@ public class PortfolioContext : DbContext
     public DbSet<Project> Projects { get; set; }
     public DbSet<Skill> Skills { get; set; }
     public DbSet<Technology> Technologies { get; set; }
-    public DbSet <HeroSection> HeroSections { get; set; }
+    public DbSet<HeroSection> HeroSections { get; set; }
+    public DbSet<Category> Categories { get; set; }
 }

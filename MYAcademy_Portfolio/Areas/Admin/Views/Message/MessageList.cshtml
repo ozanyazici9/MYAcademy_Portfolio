@@ -1,0 +1,54 @@
+﻿@model List<Message>
+
+@{
+    ViewData["Title"] = "Mesaj Listesi";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Mesajlar ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                        </div>
+                        <table class="table table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tarih</th>
+                                    <th scope="col">Ad Soyad</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Mesaj Detayı</th>                          
+                                    <th scope="col">Durum</th>                                                        
+                                    <th scope="col">Güncelle</th>
+                                    <th scope="col">Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.MessageId</td>
+                                        <td>@item.SendDate</td>
+                                        <td>@item.NameSurname</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Subject</td>
+                                        <td>@item.MessageDetail</td>
+                                        <td>@item.IsRead</td>
+                                        <td><a asp-area="Admin" asp-controller="Message" asp-action="UpdateMessage" asp-route-id="@item.MessageId" class="btn btn-warning">Güncelle</a></td>
+                                        <td><a asp-area="Admin" asp-controller="Message" asp-action="DeleteMessage" asp-route-id="@item.MessageId" class="btn btn-danger">Sil</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <a asp-area="Admin" asp-controller="Message" asp-action="CreateMessage" class="btn btn-primary">Yeni Mesaj Girişi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

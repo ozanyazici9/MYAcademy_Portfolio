@@ -9,5 +9,7 @@ public class Project
     public string GithubUrl { get; set; } = null!;
     public string LiveDemoUrl { get; set; } = null!;
     public bool IsActive { get; set; }
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
     public ICollection<Technology> Technologies { get; set; } = new List<Technology>();
 }

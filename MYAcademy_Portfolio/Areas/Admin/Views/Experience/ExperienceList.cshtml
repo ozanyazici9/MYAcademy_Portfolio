@@ -1,0 +1,56 @@
+﻿@model List<Experience>
+
+@{
+    ViewData["Title"] = "Deneyim Listesi";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Deneyimler ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                        </div>
+                        <table class="table table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Başlık</th>
+                                    <th scope="col">Alt Başlık</th>
+                                    <th scope="col">Şirket</th>                                  
+                                    <th scope="col">Tarih</th>                                  
+                                    <th scope="col">Çalışma Türü</th>                                  
+                                    <th scope="col">Açıklama</th>                                
+                                    <th scope="col">Durum</th>                                
+                                    <th scope="col">Güncelle</th>
+                                    <th scope="col">Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ExperienceId</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.SideTitle</td>
+                                        <td>@item.CompanyName</td>
+                                        <td>@item.Duration</td>
+                                        <td>@item.WorkType</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.IsActive</td>
+                                        <td><a asp-area="Admin" asp-controller="Experience" asp-action="UpdateExperience" asp-route-id="@item.ExperienceId" class="btn btn-warning">Güncelle</a></td>
+                                        <td><a asp-area="Admin" asp-controller="Experience" asp-action="DeleteExperience" asp-route-id="@item.ExperienceId" class="btn btn-danger">Sil</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <a asp-area="Admin" asp-controller="Experience" asp-action="CreateExperience" class="btn btn-primary">Yeni Deneyim Girişi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

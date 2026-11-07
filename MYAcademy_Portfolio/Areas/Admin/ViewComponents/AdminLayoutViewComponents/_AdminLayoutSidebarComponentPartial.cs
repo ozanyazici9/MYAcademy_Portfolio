@@ -10,3 +10,5 @@ namespace MYAcademy_Portfolio.Areas.Admin.ViewComponents.AdminLayoutViewComponen
         }
     }
 }
+//_AdminLayoutSidebarComponentPartial sınıfı bir viewcomponent bu sınıf otomatik olarak
+//views / shared / components / _AdminLayoutSidebarComponentPartial / default.cshtml i bulup onu döndürüyor.

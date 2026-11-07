@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+
+    int total = ViewBag.messageCount ?? 0;
+    int readCount = ViewBag.messageReadByTrueCount ?? 0;
+    int unreadCount = ViewBag.messageReadByFalseCount ?? 0;
+    int readPercent = total > 0 ? (int)Math.Round(readCount * 100.0 / total) : 0;
+    int unreadPercent = total > 0 ? 100 - readPercent : 0;
+}
+
+<link rel="stylesheet" href="~/css/AdminDashboard.css" asp-append-version="true" />
+
+<div class="dash">
+
+    <!-- Başlık -->
+    <div class="dash-header">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Hoş geldiniz! Portfolyo sitenizin genel durumu aşağıda.</p>
+        </div>
+        <a href="#" class="dash-btn">✉ Tüm Mesajlar</a>
+    </div>
+
+    <!-- İstatistik kartları -->
+    <div class="dash-grid dash-stats">
+        <div class="dash-card stat">
+            <div class="stat-icon bg-indigo">✉</div>
+            <div>
+                <p class="stat-label">Toplam Mesaj</p>
+                <p class="stat-value">@total</p>
+                <div class="stat-sub">Tüm zamanlar</div>
+            </div>
+        </div>
+        <div class="dash-card stat">
+            <div class="stat-icon bg-green">✔</div>
+            <div>
+                <p class="stat-label">Okunmuş Mesaj</p>
+                <p class="stat-value">@readCount</p>
+                <div class="stat-sub">%@readPercent oranında</div>
+            </div>
+        </div>
+        <div class="dash-card stat">
+            <div class="stat-icon bg-amber">●</div>
+            <div>
+                <p class="stat-label">Okunmamış Mesaj</p>
+                <p class="stat-value">@unreadCount</p>
+                <div class="stat-sub">%@unreadPercent oranında</div>
+            </div>
+        </div>
+        <div class="dash-card stat">
+            <div class="stat-icon bg-sky">👁</div>
+            <div>
+                <p class="stat-label">Bu Ay Ziyaretçi</p>
+                <p class="stat-value">1.284</p>
+                <div class="stat-sub">Geçen aya göre +12%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mesaj durumu + Grafik -->
+    <div class="dash-grid dash-main">
+        <div class="dash-card">
+            <h3>Mesaj Durumu</h3>
+            <div class="progress-row">
+                <div class="progress-top"><span>Okunmuş</span><span>@readCount / @total</span></div>
+                <div class="progress-bar"><div class="progress-fill fill-green" style="width:@(readPercent)%"></div></div>
+            </div>
+            <div class="progress-row">
+                <div class="progress-top"><span>Okunmamış</span><span>@unreadCount / @total</span></div>
+                <div class="progress-bar"><div class="progress-fill fill-amber" style="width:@(unreadPercent)%"></div></div>
+            </div>
+        </div>
+
+        <div class="dash-card">
+            <h3>Okunma Oranı</h3>
+            <div class="donut-wrap">
+                <div class="donut" style="background: conic-gradient(#10b981 0 @(readPercent)%, #f59e0b @(readPercent)% 100%);">
+                    <div class="donut-inner">
+                        <strong>%@readPercent</strong>
+                        <small>okundu</small>
+                    </div>
+                </div>
+                <ul class="legend">
+                    <li><i style="background:#10b981"></i> Okunmuş (@readCount)</li>
+                    <li><i style="background:#f59e0b"></i> Okunmamış (@unreadCount)</li>
+                    <li><i style="background:#4f46e5"></i> Toplam (@total)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hızlı mesaj listesi (statik) -->
+    <div class="dash-card" style="margin-bottom:20px;">
+        <h3>Son Mesajlar <a href="#">Tümünü gör →</a></h3>
+        <div class="table-scroll">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Gönderen</th>
+                        <th>Konu</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><div class="name-cell"><span class="avatar">AY</span><div>Ahmet Yılmaz<div class="muted">ahmet@ornek.com</div></div></div></td>
+                        <td>Proje teklifi hakkında</td>
+                        <td class="muted">06.11.2026</td>
+                        <td><span class="badge badge-unread">Okunmadı</span></td>
+                    </tr>
+                    <tr>
+                        <td><div class="name-cell"><span class="avatar">EK</span><div>Elif Kaya<div class="muted">elif@ornek.com</div></div></div></td>
+                        <td>Web sitesi tasarımı</td>
+                        <td class="muted">05.11.2026</td>
+                        <td><span class="badge badge-unread">Okunmadı</span></td>
+                    </tr>
+                    <tr>
+                        <td><div class="name-cell"><span class="avatar">MD</span><div>Mehmet Demir<div class="muted">mehmet@ornek.com</div></div></div></td>
+                        <td>İş birliği önerisi</td>
+                        <td class="muted">03.11.2026</td>
+                        <td><span class="badge badge-read">Okundu</span></td>
+                    </tr>
+                    <tr>
+                        <td><div class="name-cell"><span class="avatar">ZÇ</span><div>Zeynep Çelik<div class="muted">zeynep@ornek.com</div></div></div></td>
+                        <td>Teşekkür mesajı</td>
+                        <td class="muted">01.11.2026</td>
+                        <td><span class="badge badge-read">Okundu</span></td>
+                    </tr>
+                    <tr>
+                        <td><div class="name-cell"><span class="avatar">BA</span><div>Burak Aksoy<div class="muted">burak@ornek.com</div></div></div></td>
+                        <td>Freelance iş talebi</td>
+                        <td class="muted">29.10.2026</td>
+                        <td><span class="badge badge-read">Okundu</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Son aktiviteler + Hızlı erişim (statik) -->
+    <div class="dash-grid dash-main">
+        <div class="dash-card">
+            <h3>Son Aktiviteler</h3>
+            <ul class="activity">
+                <li><span class="dot" style="background:#4f46e5"></span><div>Yeni bir proje eklendi: <b>E-Ticaret Sitesi</b><span class="time">2 saat önce</span></div></li>
+                <li><span class="dot" style="background:#10b981"></span><div>Hakkımda bölümü güncellendi<span class="time">Dün</span></div></li>
+                <li><span class="dot" style="background:#f59e0b"></span><div>Yeni yetenek eklendi: <b>ASP.NET Core</b><span class="time">3 gün önce</span></div></li>
+                <li><span class="dot" style="background:#0284c7"></span><div>Deneyim bilgileri düzenlendi<span class="time">1 hafta önce</span></div></li>
+            </ul>
+        </div>
+
+        <div class="dash-card">
+            <h3>Hızlı Erişim</h3>
+            <div class="quick-links">
+                <a href="#">📁 Projeler</a>
+                <a href="#">🛠 Yetenekler</a>
+                <a href="#">💼 Deneyimler</a>
+                <a href="#">🎓 Eğitim</a>
+                <a href="#">👤 Hakkımda</a>
+                <a href="#">✉ Mesajlar</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

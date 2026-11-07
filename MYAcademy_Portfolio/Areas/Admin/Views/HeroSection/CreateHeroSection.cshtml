@@ -1,0 +1,70 @@
+﻿@model HeroSection
+
+@{
+    ViewData["Title"] = "Create Hero Section";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Create-Update.css" asp-append-version="true" />
+
+<div class="form-card">
+    <form asp-area="Admin" asp-action="CreateHeroSection" method="post">
+
+        <div class="form-card-header">
+            <div class="form-card-icon"><i class="bi bi-briefcase"></i></div>
+            <div>
+                <h5 class="mb-0 fw-bold">Yeni Hero Bölümü</h5>
+                <small class="text-secondary">Portfolyonda görünecek hero section bilgilerini gir.</small>
+            </div>
+        </div>
+
+        <div class="form-card-body">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2"></div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="Title" class="form-label">Başlık <span class="req">*</span></label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-text-left"></i>
+                        <input asp-for="Title" class="form-control" placeholder="Örn: Merhaba" required />
+                    </div>
+                    <span asp-validation-for="Title"></span>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="SubTitle" class="form-label">Alt Başlık</label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-text-left"></i>
+                        <input asp-for="SubTitle" class="form-control" placeholder="Örn: Ozan Ben" />
+                    </div>
+                    <span asp-validation-for="SubTitle"></span>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="ImageUrl" class="form-label">Görsel URL <span class="req">*</span></label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-image"></i>
+                        <input asp-for="ImageUrl" class="form-control" placeholder="Örn: https://example.com/image.jpg" required />
+                    </div>
+                    <span asp-validation-for="ImageUrl"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Description" class="form-label">Açıklama <span class="req">*</span></label>
+                    <textarea asp-for="Description" class="form-control" rows="5"
+                              placeholder="Hero bölümünde gösterilecek açıklama..." required></textarea>
+                    <span asp-validation-for="Description"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card-footer">
+            <a asp-area="Admin" asp-action="Index" class="btn btn-soft">
+                <i class="bi bi-arrow-left me-1"></i> Vazgeç
+            </a>
+            <button type="submit" class="btn btn-accent">
+                <i class="bi bi-check2-circle me-1"></i> Hero Section Kaydet
+            </button>
+        </div>
+    </form>
+</div>

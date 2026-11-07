@@ -63,6 +63,23 @@ namespace MYAcademy_Portfolio.Migrations
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("MYAcademy_Portfolio.Entities.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("MYAcademy_Portfolio.Entities.Certificate", b =>
                 {
                     b.Property<int>("CertificateId")
@@ -269,6 +286,9 @@ namespace MYAcademy_Portfolio.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectId"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -293,6 +313,8 @@ namespace MYAcademy_Portfolio.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProjectId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Projects");
                 });
@@ -358,6 +380,17 @@ namespace MYAcademy_Portfolio.Migrations
                     b.ToTable("ProjectTechnology");
                 });
 
+            modelBuilder.Entity("MYAcademy_Portfolio.Entities.Project", b =>
+                {
+                    b.HasOne("MYAcademy_Portfolio.Entities.Category", "Category")
+                        .WithMany("Projects")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("MYAcademy_Portfolio.Entities.Technology", b =>
                 {
                     b.HasOne("MYAcademy_Portfolio.Entities.Skill", "Skill")
@@ -382,6 +415,11 @@ namespace MYAcademy_Portfolio.Migrations
                         .HasForeignKey("TechnologiesTechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MYAcademy_Portfolio.Entities.Category", b =>
+                {
+                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("MYAcademy_Portfolio.Entities.Skill", b =>
