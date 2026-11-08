@@ -43,7 +43,7 @@ public class HeroSectionController : Controller
         return RedirectToAction("HeroSectionList");
     }
 
-
+    [HttpGet]
     public IActionResult UpdateHeroSection(int id)
     {
         var entity = _context.HeroSections.Find(id);

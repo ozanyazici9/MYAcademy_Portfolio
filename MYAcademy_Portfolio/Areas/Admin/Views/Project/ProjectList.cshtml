@@ -1,0 +1,65 @@
+﻿@model List<Project>
+
+@{
+    ViewData["Title"] = "Proje Listesi";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Projeler ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                        </div>
+                        <table class="table table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Görsel</th>
+                                    <th scope="col">Proje Adı</th>
+                                    <th scope="col">Kategori</th>
+                                    <th scope="col">Teknolojiler</th>
+                                    <th scope="col">Açıklama</th>
+                                    <th scope="col">GitHub URL</th>
+                                    <th scope="col">Canlı URL</th>
+                                    <th scope="col">Durum</th>
+                                    <th scope="col">Güncelle</th>
+                                    <th scope="col">Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ProjectId</td>
+                                        <td><img src="@item.ImageUrl" alt="Project Image" style="width: 100px; height: auto;" /></td>
+                                        <td>@item.ProjectName</td>
+                                        <td>@item.Category.CategoryName</td>
+                                        <td>
+                                            <div class="d-flex flex-wrap gap-1">
+                                                @foreach (var tech in item.Technologies)
+                                                {
+                                                    <span class="badge bg-primary">@tech.TechnologyName</span>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td>@item.Description</td>
+                                        <td>@item.GithubUrl</td>
+                                        <td>@item.LiveDemoUrl</td>
+                                        <td>@item.IsActive</td>
+                                        <td><a href="/Project/UpdateProject/@item.ProjectId" class="btn btn-warning">Güncelle</a></td>
+                                        <td><a href="/Project/DeleteProject/@item.ProjectId" class="btn btn-danger">Sil</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <a href="/Project/CreateProject/" class="btn btn-primary">Yeni Proje Girişi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

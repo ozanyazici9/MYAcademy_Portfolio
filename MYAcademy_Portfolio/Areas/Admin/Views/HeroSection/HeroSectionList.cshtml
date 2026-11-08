@@ -5,7 +5,6 @@
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -36,13 +35,13 @@
                                         <td>@item.SubTitle</td>
                                         <td>@item.Description</td>
                                         <td>@item.ImageUrl</td>
-                                        <td><a href="/HeroSection/UpdateHeroSection/@item.HeroSectionId" class="btn btn-warning">Güncelle</a></td>
-                                        <td><a href="/HeroSection/DeleteHeroSection/@item.HeroSectionId" class="btn btn-danger">Sil</a></td>
+                                        <td><a asp-area="Admin" asp-controller="HeroSection" asp-Action="UpdateHeroSection" asp-route-id="@item.HeroSectionId" class="btn btn-warning">Güncelle</a></td>
+                                        <td><a asp-area="Admin" asp-controller="HeroSection" asp-Action="DeleteHeroSection" asp-route-id="@item.HeroSectionId" class="btn btn-danger">Sil</a></td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a href="/HeroSection/CreateHeroSection/" class="btn btn-primary">Yeni Hero Section Girişi</a>
+                        <a asp-area="Admin" asp-controller="HeroSection" asp-Action="CreateHeroSection" class="btn btn-primary">Yeni Hero Section Girişi</a>
                     </div>
                 </div>
             </div>

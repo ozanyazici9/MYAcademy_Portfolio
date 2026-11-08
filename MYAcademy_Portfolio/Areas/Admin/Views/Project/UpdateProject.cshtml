@@ -1,0 +1,121 @@
+﻿@model Project
+
+@{
+    ViewData["Title"] = "Proje Güncelle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Create-Update.css" asp-append-version="true" />
+
+<div class="form-card">
+    <form asp-area="Admin" asp-action="UpdateProject" method="post">
+
+        <div class="form-card-header">
+            <div class="form-card-icon"><i class="bi bi-briefcase"></i></div>
+            <div>
+                <h5 class="mb-0 fw-bold">Proje Güncelle</h5>
+                <small class="text-secondary">Proje bilgilerini güncelleyin. </small>
+            </div>
+        </div>
+
+        <div class="form-card-body">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2"></div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="ProjectName" class="form-label">Proje Adı <span class="req">*</span></label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-folder2-open"></i>
+                        <input asp-for="ProjectName" class="form-control" placeholder="Örn: Veteriner Otomasyonu" required />
+                    </div>
+                    <span asp-validation-for="ProjectName"></span>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="CategoryId" class="form-label">Kategori <span class="req">*</span></label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-tags"></i>
+                        <select asp-for="CategoryId"
+                                asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "CategoryName"))"
+                                class="form-select" required>
+                            <option value="">Seçiniz...</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="CategoryId"></span>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="ImageUrl" class="form-label">Görsel URL <span class="req">*</span></label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-image"></i>
+                        <input asp-for="ImageUrl" class="form-control" placeholder="Örn: https://example.com/image.jpg" required />
+                    </div>
+                    <span asp-validation-for="ImageUrl"></span>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="GithubUrl" class="form-label">GitHub URL</label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-github"></i>
+                        <input asp-for="GithubUrl" class="form-control" placeholder="Örn: https://github.com/user/repo" />
+                    </div>
+                    <span asp-validation-for="GithubUrl"></span>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <label asp-for="LiveDemoUrl" class="form-label">Canlı Demo URL</label>
+                    <div class="input-icon-wrap">
+                        <i class="bi bi-globe2"></i>
+                        <input asp-for="LiveDemoUrl" class="form-control" placeholder="Örn: https://example.com/demo" />
+                    </div>
+                    <span asp-validation-for="LiveDemoUrl"></span>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label">Durum</label>
+                    <div class="status-box">
+                        <div>
+                            <div class="fw-semibold" style="font-size: 0.86rem;">Proje sitede gösterilecek mi?</div>
+                            <small class="text-secondary">Aktif ise site üzerinde görünür.</small>
+                        </div>
+                        <div class="form-check form-switch m-0">
+                            <input asp-for="IsActive" class="form-check-input" type="checkbox" role="switch" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label"><i class="bi bi-code-slash me-1"></i> Kullanılan Teknolojiler</label>
+                    <div class="tech-picker">
+                        @foreach (var tech in ViewBag.Technologies)
+                        {
+                            <div class="tech-option">
+                                <input type="checkbox" name="technologyIds" value="@tech.TechnologyId" id="tech-@tech.TechnologyId" />
+                                <label for="tech-@tech.TechnologyId">
+                                    <i class="bi bi-check2"></i> @tech.TechnologyName
+                                </label>
+                            </div>
+                        }
+                    </div>
+                    <small class="text-secondary">Projede kullandığın teknolojilere tıklayarak seç.</small>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Description" class="form-label">Açıklama <span class="req">*</span></label>
+                    <textarea asp-for="Description" class="form-control" rows="5"
+                              placeholder="Proje hakkında detaylı bilgi..." required></textarea>
+                    <span asp-validation-for="Description"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card-footer">
+            <a asp-area="Admin" asp-action="Index" class="btn btn-soft">
+                <i class="bi bi-arrow-left me-1"></i> Vazgeç
+            </a>
+            <button type="submit" class="btn btn-accent">
+                <i class="bi bi-check2-circle me-1"></i> Projeyi Güncelle
+            </button>
+        </div>
+    </form>
+</div>
