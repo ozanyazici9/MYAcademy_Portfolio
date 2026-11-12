@@ -3,13 +3,19 @@
 @{
     ViewData["Title"] = "Proje Güncelle";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+
+    var allTechnologies = (List<Technology>)ViewBag.Technologies;
+
+    var selectedIds = (ViewBag.SelectedTechnologyIds as List<int>)
+                      ?? Model.Technologies.Select(t => t.TechnologyId).ToList();
+
 }
 
 <link rel="stylesheet" href="~/css/Create-Update.css" asp-append-version="true" />
 
 <div class="form-card">
-    <form asp-area="Admin" asp-action="UpdateProject" method="post">
-
+    <form asp-area="Admin" asp-controller="Project" asp-action="UpdateProject" method="post">
+        <input type="hidden" asp-for="ProjectId" />
         <div class="form-card-header">
             <div class="form-card-icon"><i class="bi bi-briefcase"></i></div>
             <div>
@@ -87,17 +93,19 @@
                 <div class="col-12">
                     <label class="form-label"><i class="bi bi-code-slash me-1"></i> Kullanılan Teknolojiler</label>
                     <div class="tech-picker">
-                        @foreach (var tech in ViewBag.Technologies)
+                        @foreach (var tech in allTechnologies)
                         {
                             <div class="tech-option">
-                                <input type="checkbox" name="technologyIds" value="@tech.TechnologyId" id="tech-@tech.TechnologyId" />
+                                <input type="checkbox" name="technologyIds" value="@tech.TechnologyId"
+                                       id="tech-@tech.TechnologyId"
+                                       checked="@(selectedIds.Contains(tech.TechnologyId))" />
                                 <label for="tech-@tech.TechnologyId">
                                     <i class="bi bi-check2"></i> @tech.TechnologyName
                                 </label>
                             </div>
                         }
                     </div>
-                    <small class="text-secondary">Projede kullandığın teknolojilere tıklayarak seç.</small>
+                    <small class="text-secondary">Seçili olanlar projede şu an kullanılan teknolojilerdir.</small>
                 </div>
 
                 <div class="col-12">

@@ -30,6 +30,11 @@ public class HeroSectionController : Controller
     [HttpPost]
     public IActionResult CreateHeroSection(HeroSection heroSection)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(heroSection);
+        }
+
         _context.HeroSections.Add(heroSection);
         _context.SaveChanges();
         return RedirectToAction("HeroSectionList");
@@ -38,6 +43,11 @@ public class HeroSectionController : Controller
     [HttpPost]
     public IActionResult UpdateHeroSection(HeroSection heroSection)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(heroSection);
+        }
+
         _context.HeroSections.Update(heroSection);
         _context.SaveChanges();
         return RedirectToAction("HeroSectionList");

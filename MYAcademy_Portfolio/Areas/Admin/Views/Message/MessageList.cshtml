@@ -5,14 +5,23 @@
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
+<link rel="stylesheet" href="~/css/AdminDashboard.css">
+
 <div class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
-                        <div class="card-sub">
-                            Mesajlar ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-sub">
+                                Mesajlar ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                            </div>
+                            <a asp-area="Admin" asp-controller="Message" asp-action="CreateMessage"
+                               class="btn btn-accent d-inline-flex align-items-center gap-2">
+                                <i class="bi bi-plus-lg"></i>
+                                Yeni Mesaj Girişi
+                            </a>
                         </div>
                         <table class="table table mt-3">
                             <thead>
@@ -21,9 +30,9 @@
                                     <th scope="col">Tarih</th>
                                     <th scope="col">Ad Soyad</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Mesaj Detayı</th>                          
-                                    <th scope="col">Durum</th>                                                        
+                                    <th scope="col">Konu</th>
+                                    <th scope="col">Okunma Durumu | Değiştir</th>
+                                    <th scope="col">Oku</th>
                                     <th scope="col">Güncelle</th>
                                     <th scope="col">Sil</th>
                                 </tr>
@@ -37,15 +46,28 @@
                                         <td>@item.NameSurname</td>
                                         <td>@item.Email</td>
                                         <td>@item.Subject</td>
-                                        <td>@item.MessageDetail</td>
-                                        <td>@item.IsRead</td>
-                                        <td><a asp-area="Admin" asp-controller="Message" asp-action="UpdateMessage" asp-route-id="@item.MessageId" class="btn btn-warning">Güncelle</a></td>
-                                        <td><a asp-area="Admin" asp-controller="Message" asp-action="DeleteMessage" asp-route-id="@item.MessageId" class="btn btn-danger">Sil</a></td>
+                                        <td>
+                                            <a asp-action="@(item.IsRead ? "ChangeIsReadToFalse" : "ChangeIsReadToTrue")"
+                                               asp-route-id="@item.MessageId"
+                                               class="badge mt-2 text-decoration-none @(item.IsRead ? "badge-read" : "badge-unread")"
+                                               style="width:120px;"
+                                               title="@(item.IsRead ? "Okunmadı yap" : "Okundu yap")">
+                                                @(item.IsRead ? "Okundu" : "Okunmadı")
+                                            </a>
+                                        </td>
+                                        <td><a asp-area="Admin" asp-controller="Message" asp-action="MessageDetail"
+                                             asp-route-id="@item.MessageId" class="btn btn-outline-info">Oku</a>
+                                        </td>
+                                        <td><a asp-area="Admin" asp-controller="Message" asp-action="UpdateMessage"
+                                             asp-route-id="@item.MessageId" class="btn btn-outline-warning">Güncelle</a>
+                                        </td>
+                                        <td><a asp-area="Admin" asp-controller="Message" asp-action="DeleteMessage"
+                                             asp-route-id="@item.MessageId" class="btn btn-delete btn-outline-danger">Sil</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a asp-area="Admin" asp-controller="Message" asp-action="CreateMessage" class="btn btn-primary">Yeni Mesaj Girişi</a>
                     </div>
                 </div>
             </div>

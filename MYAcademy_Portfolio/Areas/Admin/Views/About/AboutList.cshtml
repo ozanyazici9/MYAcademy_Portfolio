@@ -11,21 +11,27 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
-                        <div class="card-sub">
-                            Aboutlar ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-sub">
+                                About ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                            </div>
+                            <a asp-area="Admin" asp-controller="About" asp-action="CreateAbout"
+                               class="btn btn-accent d-inline-flex align-items-center gap-2">
+                                <i class="bi bi-plus-lg"></i>
+                                Yeni About Girişi
+                            </a>
                         </div>
                         <table class="table table mt-3">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Ad Soyad</th>
-                                    <th scope="col">İş / Unvan</th>
-                                    <th scope="col">Açıklama</th>                          
-                                    <th scope="col">Konum</th>                                                        
-                                    <th scope="col">Uzmanlık</th>                                                        
-                                    <th scope="col">Email</th>                                                   
-                                    <th scope="col">Açıklama</th>                                                 
-                                    <th scope="col">Durum</th>                                                 
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Konum</th>
+                                    <th scope="col">Meslek</th>
+                                    <th scope="col">Uzmanlık</th>
+                                    <th scope="col">Çalışmaya Açıklık</th>
+                                    <th scope="col">Açıklama</th>                                                                     
                                     <th scope="col">Güncelle</th>
                                     <th scope="col">Sil</th>
                                 </tr>
@@ -36,19 +42,22 @@
                                     <tr>
                                         <td>@item.AboutId</td>
                                         <td>@item.NameSurname</td>
-                                        <td>@item.JobTitle</td>
-                                        <td>@item.Location</td>
-                                        <td>@item.Expert</td>
                                         <td>@item.Email</td>
-                                        <td>@item.Description</td>
+                                        <td>@item.Location</td>
+                                        <td>@item.JobTitle</td>
+                                        <td>@item.Expert</td>
                                         <td>@item.OpenToWork</td>
-                                        <td><a asp-area="Admin" asp-controller="About" asp-Action="UpdateAbout" asp-route-id="@item.AboutId" class="btn btn-warning">Güncelle</a></td>
-                                        <td><a asp-area="Admin" asp-controller="About" asp-Action="DeleteAbout" asp-route-id="@item.AboutId" class="btn btn-danger">Sil</a></td>
+                                        <td>@item.Description</td>
+                                        <td><a asp-area="Admin" asp-controller="About" asp-Action="UpdateAbout"
+                                             asp-route-id="@item.AboutId" class="btn btn-outline-warning">Güncelle</a>
+                                        </td>
+                                        <td><a asp-area="Admin" asp-controller="About" asp-Action="DeleteAbout"
+                                             asp-route-id="@item.AboutId" class="btn btn-delete btn-outline-danger">Sil</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a asp-area="Admin" asp-controller="About" asp-Action="CreateAbout" class="btn btn-primary">Yeni About Girişi</a>
                     </div>
                 </div>
             </div>

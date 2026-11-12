@@ -30,6 +30,11 @@ public class ExperienceController : Controller
     [HttpPost]
     public IActionResult CreateExperience(Experience experience)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(experience);
+        }
+
         _context.Experiences.Add(experience);
         _context.SaveChanges();
         return RedirectToAction("ExperienceList");
@@ -52,6 +57,11 @@ public class ExperienceController : Controller
     [HttpPost]
     public IActionResult UpdateExperience(Experience experience)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(experience);
+        }
+
         _context.Experiences.Update(experience);
         _context.SaveChanges();
         return RedirectToAction("ExperienceList");

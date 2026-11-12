@@ -11,8 +11,15 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
-                        <div class="card-sub">
-                            Projeler ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-sub">
+                                Projeler ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                            </div>
+                            <a asp-area="Admin" asp-controller="Project" asp-action="CreateProject"
+                               class="btn btn-accent d-inline-flex align-items-center gap-2">
+                                <i class="bi bi-plus-lg"></i>
+                                Yeni Proje Girişi
+                            </a>
                         </div>
                         <table class="table table mt-3">
                             <thead>
@@ -37,7 +44,7 @@
                                         <td>@item.ProjectId</td>
                                         <td><img src="@item.ImageUrl" alt="Project Image" style="width: 100px; height: auto;" /></td>
                                         <td>@item.ProjectName</td>
-                                        <td>@item.Category.CategoryName</td>
+                                        <td>@item.Category?.CategoryName</td>
                                         <td>
                                             <div class="d-flex flex-wrap gap-1">
                                                 @foreach (var tech in item.Technologies)
@@ -49,14 +56,24 @@
                                         <td>@item.Description</td>
                                         <td>@item.GithubUrl</td>
                                         <td>@item.LiveDemoUrl</td>
-                                        <td>@item.IsActive</td>
-                                        <td><a href="/Project/UpdateProject/@item.ProjectId" class="btn btn-warning">Güncelle</a></td>
-                                        <td><a href="/Project/DeleteProject/@item.ProjectId" class="btn btn-danger">Sil</a></td>
+                                        <td>
+                                            <span class="badge mt-2
+                                                rounded-pill @(item.IsActive ? "badge-read" : "badge-unread")" style="width:120px;">
+                                                @(item.IsActive ? "Aktif" : "Pasif")
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Project" asp-action="UpdateProject" asp-route-id="@item.ProjectId"
+                                            class="btn btn-outline-warning">Güncelle</a>
+                                        </td>
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Project" asp-action="DeleteProject" asp-route-id="@item.ProjectId"
+                                            class="btn btn-outline-danger">Sil</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a href="/Project/CreateProject/" class="btn btn-primary">Yeni Proje Girişi</a>
                     </div>
                 </div>
             </div>

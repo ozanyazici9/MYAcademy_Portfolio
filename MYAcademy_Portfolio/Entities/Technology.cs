@@ -1,8 +1,14 @@
-﻿namespace MYAcademy_Portfolio.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MYAcademy_Portfolio.Entities;
 
 public class Technology
 {
     public int TechnologyId { get; set; }
+
+    [Required(ErrorMessage = "Teknoloji adı boş bırakılamaz.")]
+    [MaxLength(70, ErrorMessage = "Teknoloji adı en fazla 70 karakter olabilir.")]
+    [MinLength(3, ErrorMessage = "Teknoloji adı en az 3 karakter olmalı.")]
     public string TechnologyName { get; set; } = null!;
     public bool IsActive { get; set; }
 

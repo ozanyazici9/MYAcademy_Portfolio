@@ -84,20 +84,32 @@
                     </div>
                 </div>
 
+                @*Evet, name="technologyIds" yazdığın için form verisi bu isimle gider ve controller’daki parametre adı 
+                  bununla aynı olduğu için eşleşir.Form gönderilince ne olur Tarayıcı,işaretli her checkbox için aynı isimle 
+                  ayrı bir çift gönderir. Örneğin 1, 2 ve 5 numaralı teknolojileri seçtiysen istek gövdesi şöyle olur:
+                  ProjectName=Veteriner&IsActive=true&technologyIds=1&technologyIds=2&technologyIds=5 İşaretlenmeyen checkbox’lar hiç gönderilmez.
+                  Liste nasıl oluşuyorModel binder, action parametresine bakar:csharp
+                  public IActionResult UpdateProject(Project project, List<int> technologyIds)
+                  Parametre adı technologyIds, tipi List<int>. Binder istekte technologyIds adıyla gelen tüm değerleri
+                  toplar, her birini int’e çevirir ve listeye koyar. Sonuç: [1, 2, 5]. Aynı isimle birden fazla değer gelmesi,
+                  binder’ın koleksiyon tiplerini (List<int>, int[], IEnumerable<int>) doldurması için yeterlidir.
+                  Köşeli parantez ya da indeks yazmana gerek yok.*@
+
                 <div class="col-12">
                     <label class="form-label"><i class="bi bi-code-slash me-1"></i> Kullanılan Teknolojiler</label>
                     <div class="tech-picker">
-                        @foreach (var tech in ViewBag.Technologies)
+                        @foreach (var tech in (List<Technology>)ViewBag.Technologies)
                         {
                             <div class="tech-option">
-                                <input type="checkbox" name="technologyIds" value="@tech.TechnologyId" id="tech-@tech.TechnologyId" />
+                                <input type="checkbox" name="technologyIds" value="@tech.TechnologyId"
+                                       id="tech-@tech.TechnologyId" />
                                 <label for="tech-@tech.TechnologyId">
                                     <i class="bi bi-check2"></i> @tech.TechnologyName
                                 </label>
                             </div>
                         }
                     </div>
-                    <small class="text-secondary">Projede kullandığın teknolojilere tıklayarak seç.</small>
+                    <small class="text-secondary">Seçili olanlar projede şu an kullanılan teknolojilerdir.</small>
                 </div>
 
                 <div class="col-12">

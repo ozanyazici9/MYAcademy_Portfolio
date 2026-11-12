@@ -296,21 +296,32 @@
 
     .badge {
         display: inline-block;
-        padding: 3px 10px;
         border-radius: 99px;
-        font-size: 12px;
+        font-size: .875rem;
         font-weight: 600;
     }
 
     .badge-read {
-        background: #ecfdf5;
-        color: #047857;
+        background: transparent;
+        color: #50fa7b;
+        border: 1px solid #50fa7b;
     }
 
+        .badge-read:hover {
+            background: #50fa7b;
+            color: #fff;
+        }
+
     .badge-unread {
-        background: #fef3c7;
-        color: #b45309;
+        background: transparent;
+        color: #f59e0c;
+        border: 1px solid #f59e0c;
     }
+
+        .badge-unread:hover {
+            background: #f59e0c;
+            color: #fff;
+        }
 
     .table-scroll {
         overflow-x: auto;
@@ -371,4 +382,41 @@
                 border-color: #4f46e5;
                 background: #f5f7ff;
             }
+
+    .btn-accent {
+        background: linear-gradient(135deg, var(--fc-accent, #6d5ef5), #8b7bff);
+        border: 1px solid transparent;
+        color: #fff;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: .875rem;
+        padding: 6px 14px;
+        box-shadow: 0 3px 8px rgba(109, 94, 245, .22);
+        transition: transform .15s, box-shadow .15s;
+    }
+
+        .btn-accent:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(109, 94, 245, .28);
+            color: #fff;
+        }
+
+    .btn-swal-confirm {
+        background-color: #50fa7b;
+        border-color: #50fa7b;
+        color: #fff;
+    }
+
+        .btn-swal-confirm:hover,
+        .btn-swal-confirm:focus {
+            background-color: #2ee862;
+            border-color: #2ee862;
+            color: #fff;
+        }
+
+    .btn[class*="btn-outline-"]:hover,
+    .btn[class*="btn-outline-"]:focus,
+    .btn[class*="btn-outline-"]:active {
+        color: #fff;
+    }
 }

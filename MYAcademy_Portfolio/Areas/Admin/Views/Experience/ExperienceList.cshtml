@@ -11,8 +11,15 @@
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
-                        <div class="card-sub">
-                            Deneyimler ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-sub">
+                                Deneyimler ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+                            </div>
+                            <a asp-area="Admin" asp-controller="Experience" asp-action="CreateExperience"
+                               class="btn btn-accent d-inline-flex align-items-center gap-2">
+                                <i class="bi bi-plus-lg"></i>
+                                Yeni Deneyim Girişi
+                            </a>
                         </div>
                         <table class="table table mt-3">
                             <thead>
@@ -41,13 +48,16 @@
                                         <td>@item.WorkType</td>
                                         <td>@item.Description</td>
                                         <td>@item.IsActive</td>
-                                        <td><a asp-area="Admin" asp-controller="Experience" asp-action="UpdateExperience" asp-route-id="@item.ExperienceId" class="btn btn-warning">Güncelle</a></td>
-                                        <td><a asp-area="Admin" asp-controller="Experience" asp-action="DeleteExperience" asp-route-id="@item.ExperienceId" class="btn btn-danger">Sil</a></td>
+                                        <td><a asp-area="Admin" asp-controller="Experience" asp-action="UpdateExperience"
+                                            asp-route-id="@item.ExperienceId" class="btn btn-outline-warning">Güncelle</a>
+                                        </td>
+                                        <td><a asp-area="Admin" asp-controller="Experience" asp-action="DeleteExperience"
+                                            asp-route-id="@item.ExperienceId" class="btn btn-delete btn-outline-danger">Sil</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a asp-area="Admin" asp-controller="Experience" asp-action="CreateExperience" class="btn btn-primary">Yeni Deneyim Girişi</a>
                     </div>
                 </div>
             </div>
