@@ -14,6 +14,8 @@
 
 @await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
 
+@await RenderSectionAsync("Scripts", required: false)
+
 <body>
 
     <!-- ==================== SIDEBAR ==================== -->

@@ -71,18 +71,26 @@ public class MessageController : Controller
     }
 
     [HttpGet]
-    public IActionResult MessageDetail(int id)
+    public async Task<IActionResult> MessageDetail(int id)
     {
-        var value = _context.Messages.Find(id);
+        var message = await _context.Messages.FindAsync(id);
+        if (message == null) return NotFound();
 
-        if (!value.IsRead)
+        if (!message.IsRead)
         {
-            value.IsRead = true;
-            _context.Messages.Update(value);
-            _context.SaveChanges();
+            message.IsRead = true;
+            _context.Messages.Update(message);
+            await _context.SaveChangesAsync();
         }
 
-        return View(value);
+        return Json(new
+        {
+            message.NameSurname,
+            message.Email,
+            message.Subject,
+            SendDate = message.SendDate.ToString("dd.MM.yyyy HH:mm"),
+            message.MessageDetail
+        });
     }
 
     public IActionResult ChangeIsReadToTrue(int id)
